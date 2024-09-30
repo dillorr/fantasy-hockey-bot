@@ -13,7 +13,7 @@ from functions import (
     # get_matchups,
     get_line_combinations,
     get_starting_goalies,
-    # authenticate_yahoo,
+    # autƒhenticate_yahoo,
 )
 
 
@@ -29,7 +29,7 @@ def configure():
     with open(".config/league.json", "r") as f:
         league_config = json.load(f)
 
-        bot = init_bot()
+    bot = init_bot()
 
     return league_config, bot
 
