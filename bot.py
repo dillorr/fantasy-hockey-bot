@@ -5,6 +5,7 @@ import os
 
 from datetime import datetime, timezone, timedelta
 from discord.ext import tasks, commands
+from zoneinfo import ZoneInfo
 
 from functions import (
     init_bot,
@@ -144,7 +145,7 @@ def main():
     async def send_starting_goalies():
         channel = bot.get_channel(text_channels["starting-goalies"])
 
-        t = datetime.now(tz=timezone.utc) - timedelta(hours=8)
+        t = datetime.now(ZoneInfo("America/Los_Angeles"))
 
         # oauth = authenticate_yahoo()
 
@@ -171,7 +172,7 @@ def main():
     async def send_injury_report():
         channel = bot.get_channel(text_channels["injury-report"])
 
-        t = datetime.now(tz=timezone.utc) - timedelta(hours=8)
+        t = datetime.now(ZoneInfo("America/Los_Angeles"))
 
         # oauth = authenticate_yahoo()
 
