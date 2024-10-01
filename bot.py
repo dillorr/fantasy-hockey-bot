@@ -13,6 +13,7 @@ from functions import (
     # get_matchups,
     get_line_combinations,
     get_starting_goalies,
+    get_injury_report,
     # autƒhenticate_yahoo,
 )
 
@@ -50,6 +51,7 @@ def main():
 
         # automated jobs
         send_starting_goalies.start()
+        send_injury_report.start()
 
     @bot.command(name="beep", brief="used to test to make sure the bot is online")
     async def beep(ctx):
@@ -85,15 +87,15 @@ def main():
 
     @bot.command(name="goalies", brief="Returns projected starting goalies for the day")
     async def get_starting_goalies_command(ctx):
-        # await ctx.send("this command is temporarily disabled, sorry!")
+        await ctx.send("this command is temporarily disabled, sorry!")
         # logging.debug(f"@{ctx.message.author.name}: {ctx.message.content}")
 
-        response = ""
+        # response = ""
 
-        response += get_starting_goalies()
-        response += f"\n<@{ctx.message.author.id}>"
+        # response += get_starting_goalies()
+        # response += f"\n<@{ctx.message.author.id}>"
 
-        await ctx.send(response)
+        # await ctx.send(response)
 
     @bot.command(name="lines", brief="Returns current starting lineup for a team")
     async def get_lines_command(ctx, *args):
@@ -150,6 +152,33 @@ def main():
             # always list starting goalies
             # response += "\n"
             response += get_starting_goalies()
+
+            await channel.send(response)
+
+    @tasks.loop(minutes=1)
+    async def send_injury_report():
+        channel = bot.get_channel(text_channels["injury-report"])
+
+        t = datetime.now(tz=timezone.utc) - timedelta(hours=8)
+
+        # oauth = authenticate_yahoo()
+
+        if t.hour == 22 and t.minute == 0:
+            response = ""
+
+            # DISABLED
+            # if beginning of new week
+            # if t.weekday() == 0:
+            #     response += get_matchups(oauth=oauth, league_config=league_config)
+            #     response += "\n"
+            #     response += get_standings(oauth=oauth, league_config=league_config)
+
+            # else:
+            #     response += get_scores(oauth=oauth, league_config=league_config)
+
+            # always list starting goalies
+            # response += "\n"
+            response += get_injury_report()
 
             await channel.send(response)
 

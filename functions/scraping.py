@@ -4,6 +4,78 @@ import json
 from bs4 import BeautifulSoup
 
 
+def get_injury_report():
+    # URL of the injury report
+    url = "https://www.cbssports.com/nhl/injuries/"
+
+    # Send a request to fetch the page content
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, "html.parser")
+
+    # Find all 'TableBase-bodyTr' rows
+    rows = soup.find_all("tr", class_="TableBase-bodyTr")
+
+    player_names = [
+        player.text.strip()
+        for player in soup.find_all("span", class_="CellPlayerName--long")
+    ]
+
+    injury_objs = []
+
+    # Loop through and format each row
+    for row in rows:
+        # Extract all table cells (td) within the row
+        cells = row.find_all("td")
+
+        player_name = cells[0].text.strip()
+
+        position = cells[1].text.strip()
+
+        designation_date = " ".join(cells[2].text.strip().split(" ")[1:])
+
+        injury = cells[3].text.strip()
+
+        injury_details = cells[4].text.strip()
+
+        injury_obj = {
+            "name": player_name,
+            "position": position,
+            "date": designation_date,
+            "injury": injury,
+            "details": injury_details,
+        }
+
+        injury_objs.append(injury_obj)
+
+    # Replace dict values with corresponding strings
+    for i, new_value in enumerate(player_names):
+        injury_objs[i]["name"] = new_value
+
+    # pop all objs that are not new
+    injury_objs = [
+        obj
+        for obj in injury_objs
+        if datetime.today().date().replace(year=1900)
+        == datetime.strptime(obj["date"], "%b %d").date()
+    ]
+    injury_objs = sorted(injury_objs, key=lambda d: d["name"])
+
+    response = ""
+
+    today = datetime.today().strftime("%B %d, %Y")
+
+    response += f"**NHL Injury Report - {today}**\n"
+
+    response += "```"
+
+    for obj in injury_objs:
+        response += f"""{obj["name"]} ({obj["position"]}): {obj["injury"]} - {obj["details"]}\n"""
+
+    response += "```"
+
+    return response
+
+
 def get_starting_goalies() -> str:
     url = "https://www.dailyfaceoff.com/starting-goalies/"
 

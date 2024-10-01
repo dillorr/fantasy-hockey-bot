@@ -4,4 +4,4 @@
 # from .matchup import get_scores, get_matchups
 # from .yahoo_authentication import authenticate_yahoo
 from .bot_init import init_bot
-from .scraping import get_starting_goalies, get_line_combinations
+from .scraping import get_starting_goalies, get_line_combinations, get_injury_report
