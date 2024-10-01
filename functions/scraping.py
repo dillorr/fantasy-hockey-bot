@@ -3,6 +3,7 @@ import json
 from datetime import datetime
 
 from bs4 import BeautifulSoup
+from zoneinfo import ZoneInfo
 
 
 def get_injury_report():
@@ -56,14 +57,14 @@ def get_injury_report():
     injury_objs = [
         obj
         for obj in injury_objs
-        if datetime.today().date().replace(year=1900)
+        if datetime.today(ZoneInfo("America/Los_Angeles")).date().replace(year=1900)
         == datetime.strptime(obj["date"], "%b %d").date()
     ]
     injury_objs = sorted(injury_objs, key=lambda d: d["name"])
 
     response = ""
 
-    today = datetime.today().strftime("%B %d, %Y")
+    today = datetime.today(ZoneInfo("America/Los_Angeles")).strftime("%B %d, %Y")
 
     response += f"**NHL Injury Report - {today}**\n"
 
