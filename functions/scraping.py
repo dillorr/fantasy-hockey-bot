@@ -75,6 +75,8 @@ def get_injury_report():
 
     response += "```"
 
+    response += f"Source: <{url}>\n"
+
     return response
 
 
