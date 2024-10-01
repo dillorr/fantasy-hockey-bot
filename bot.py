@@ -97,6 +97,20 @@ def main():
 
         # await ctx.send(response)
 
+    @bot.command(
+        name="injuries", brief="Returns projected starting goalies for the day"
+    )
+    async def get_injury_report_command(ctx):
+        # await ctx.send("this command is temporarily disabled, sorry!")
+        # logging.debug(f"@{ctx.message.author.name}: {ctx.message.content}")
+
+        response = ""
+
+        response += get_injury_report()
+        response += f"\n<@{ctx.message.author.id}>"
+
+        await ctx.send(response)
+
     @bot.command(name="lines", brief="Returns current starting lineup for a team")
     async def get_lines_command(ctx, *args):
         # await ctx.send("this command is temporarily disabled, sorry!")
