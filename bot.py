@@ -97,9 +97,7 @@ def main():
 
         # await ctx.send(response)
 
-    @bot.command(
-        name="injuries", brief="Returns projected starting goalies for the day"
-    )
+    @bot.command(name="injuries", brief="Returns injury report for the day")
     async def get_injury_report_command(ctx):
         # await ctx.send("this command is temporarily disabled, sorry!")
         # logging.debug(f"@{ctx.message.author.name}: {ctx.message.content}")
