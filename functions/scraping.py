@@ -71,13 +71,18 @@ def get_injury_report():
     response += f"☠️ **{page_title} - {today}**\n\n"
 
     # response += "```"
-
-    for obj in injury_objs[0:20]:
+    for obj in injury_objs:
         response += f"""{obj["name"]} ({obj["position"]}): {obj["injury"]} - {obj["details"]}\n"""
 
     # response += "```"
 
-    print(len(response))
+    if len(response) > 2000:
+        response = f"☠️ **{page_title} - {today}**\*;\n"
+        response += "\**Injury details removed due to length restrictions. See source link below for more.*\n\n"
+
+        # response += "```"
+        for obj in injury_objs:
+            response += f"""{obj["name"]} ({obj["position"]}): {obj["injury"]}\n"""
 
     response += f"\n*Source: <{url}>*\n"
 
