@@ -77,7 +77,7 @@ def get_injury_report():
     # response += "```"
 
     if len(response) > 2000:
-        response = f"☠️ **{page_title} - {today} - Condensed**;\n"
+        response = f"☠️ **{page_title} - {today} - Condensed**\n"
 
         response += "*Full injury report exceeds Discord message size limit. See source link for more info.*\n\n"
 
