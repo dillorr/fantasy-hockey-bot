@@ -66,7 +66,9 @@ def get_injury_report():
 
     today = datetime.now(ZoneInfo("America/Los_Angeles")).strftime("%B %d, %Y")
 
-    response += f"**NHL Injury Report - {today}**\n\n"
+    page_title = "NHL Injury Report"
+
+    response += f"☠️ **{page_title} - {today}**\n\n"
 
     # response += "```"
 
@@ -77,7 +79,7 @@ def get_injury_report():
 
     print(len(response))
 
-    response += f"\nSource: <{url}>\n"
+    response += f"\n*Source: <{url}>*\n"
 
     return response
 
@@ -107,7 +109,7 @@ def get_starting_goalies() -> str:
     ]["data"]
 
     output = ""
-    output += f"**{page_title}**\n\n"
+    output += f"🥅 **{page_title}**\n\n"
     # output += "```"
 
     for m in matchups:
@@ -136,7 +138,7 @@ def get_starting_goalies() -> str:
     # print(output)
     # print(matchups)
     # output += "```"
-    output += f"Source: <{url}>\n"
+    output += f"*Source: <{url}>*\n"
 
     return output
 
@@ -165,7 +167,7 @@ def get_line_combinations(team_name: str) -> str:
     ]["combinations"]["players"]
 
     output = ""
-    output += f"**{page_title}**"
+    output += f"🧑‍🧒‍🧒 **{page_title}**"
     # output += "```"
 
     for p in players:
@@ -182,6 +184,6 @@ def get_line_combinations(team_name: str) -> str:
 
     # output += "```"
 
-    output += f"Source: <{url}>\n"
+    output += f"*Source: <{url}>*\n"
 
     return output
