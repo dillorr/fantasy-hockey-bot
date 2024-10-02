@@ -70,19 +70,22 @@ def get_injury_report():
 
     response += f"☠️ **{page_title} - {today}**\n\n"
 
-    # response += "```"
+    response += "```"
     for obj in injury_objs:
-        response += f"""{obj["name"]} ({obj["position"]}): {obj["injury"]} - {obj["details"]}\n"""
+        response += f"""•{obj["name"]} ({obj["position"]}): {obj["injury"]} - {obj["details"]}\n"""
 
-    # response += "```"
+    response += "```"
 
     if len(response) > 2000:
         response = f"☠️ **{page_title} - {today} - Condensed**;\n"
+
         response += "*Full injury report exceeds Discord message size limit. See source link for more info.*\n\n"
 
-        # response += "```"
+        response += "```"
         for obj in injury_objs:
-            response += f"""{obj["name"]} ({obj["position"]}): {obj["injury"]}\n"""
+            response += f"""•{obj["name"]} ({obj["position"]}): {obj["injury"]}\n"""
+
+        response += "```"
 
     response += f"\n*Source: <{url}>*\n"
 
@@ -115,7 +118,7 @@ def get_starting_goalies() -> str:
 
     output = ""
     output += f"🥅 **{page_title}**\n\n"
-    # output += "```"
+    output += "```"
 
     for m in matchups:
         # print(m, '\n')
@@ -140,9 +143,7 @@ def get_starting_goalies() -> str:
         output += f" ({away_status})"
         output += "\n\n"
 
-    # print(output)
-    # print(matchups)
-    # output += "```"
+    output += "```"
     output += f"*Source: <{url}>*\n"
 
     return output
@@ -173,7 +174,7 @@ def get_line_combinations(team_name: str) -> str:
 
     output = ""
     output += f"🧑‍🧒‍🧒 **{page_title}**"
-    # output += "```"
+    output += "```"
 
     for p in players:
         group_name = p["groupName"]
@@ -187,7 +188,7 @@ def get_line_combinations(team_name: str) -> str:
         output += f'{p["name"]}'
         output += f' ({p["positionIdentifier"].upper()})'
 
-    # output += "```"
+    output += "```"
 
     output += f"*Source: <{url}>*\n"
 
