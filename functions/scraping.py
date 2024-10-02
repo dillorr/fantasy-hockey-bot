@@ -66,7 +66,7 @@ def get_injury_report():
 
     today = datetime.now(ZoneInfo("America/Los_Angeles")).strftime("%B %d, %Y")
 
-    response += f"**NHL Injury Report - {today}**\n"
+    response += f"**NHL Injury Report - {today}**\n\n"
 
     # response += "```"
 
@@ -107,9 +107,8 @@ def get_starting_goalies() -> str:
     ]["data"]
 
     output = ""
-    output += f"**{page_title}**"
+    output += f"**{page_title}**\n\n"
     # output += "```"
-    output += "\n\n"
 
     for m in matchups:
         # print(m, '\n')
