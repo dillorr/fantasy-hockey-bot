@@ -15,7 +15,7 @@ from functions import (
     get_line_combinations,
     get_starting_goalies,
     get_injury_report,
-    # autƒhenticate_yahoo,
+    # authenticate_yahoo,
 )
 
 
@@ -136,7 +136,7 @@ def main():
             response = "Could not parse commands argument"
         else:
             print(error)
-            response = f'I don\'t know what "{ctx.message.content}" means.'
+            response = f'Whoops! Something went wrong with "{ctx.message.content}".'
 
         await ctx.send(response)
 

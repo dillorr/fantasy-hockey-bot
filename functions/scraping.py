@@ -68,12 +68,14 @@ def get_injury_report():
 
     response += f"**NHL Injury Report - {today}**\n"
 
-    response += "```"
+    # response += "```"
 
-    for obj in injury_objs:
+    for obj in injury_objs[0:20]:
         response += f"""{obj["name"]} ({obj["position"]}): {obj["injury"]} - {obj["details"]}\n"""
 
-    response += "```"
+    # response += "```"
+
+    print(len(response))
 
     response += f"Source: <{url}>\n"
 
