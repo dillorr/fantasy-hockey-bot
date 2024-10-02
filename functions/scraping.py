@@ -77,7 +77,7 @@ def get_injury_report():
 
     print(len(response))
 
-    response += f"Source: <{url}>\n"
+    response += f"\nSource: <{url}>\n"
 
     return response
 
@@ -108,7 +108,7 @@ def get_starting_goalies() -> str:
 
     output = ""
     output += f"**{page_title}**"
-    output += "```"
+    # output += "```"
     output += "\n\n"
 
     for m in matchups:
@@ -136,7 +136,7 @@ def get_starting_goalies() -> str:
 
     # print(output)
     # print(matchups)
-    output += "```"
+    # output += "```"
     output += f"Source: <{url}>\n"
 
     return output
@@ -167,7 +167,7 @@ def get_line_combinations(team_name: str) -> str:
 
     output = ""
     output += f"**{page_title}**"
-    output += "```"
+    # output += "```"
 
     for p in players:
         group_name = p["groupName"]
@@ -181,7 +181,7 @@ def get_line_combinations(team_name: str) -> str:
         output += f'{p["name"]}'
         output += f' ({p["positionIdentifier"].upper()})'
 
-    output += "```"
+    # output += "```"
 
     output += f"Source: <{url}>\n"
 
