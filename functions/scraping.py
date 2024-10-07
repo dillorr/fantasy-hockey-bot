@@ -68,22 +68,22 @@ def get_injury_report():
 
     page_title = "NHL Injury Report"
 
-    response += f"☠️ **{page_title} - {today}**\n\n"
+    response += f"## ☠️ {page_title} - {today}\n\n"
 
     # response += "```"
     for obj in injury_objs:
-        response += f"""•{obj["name"]} ({obj["position"]}): {obj["injury"]} - {obj["details"]}\n"""
+        response += f"""* {obj["name"]} ({obj["position"]}): {obj["injury"]} - {obj["details"]}\n"""
 
     # response += "```"
 
     if len(response) > 2000:
-        response = f"☠️ **{page_title} - {today} - Condensed**\n"
+        response = f"☠️ **{page_title} - {today} (Condensed)**\n"
 
         response += "*Full injury report exceeds Discord message size limit. See source link for more info.*\n\n"
 
         # response += "```"
         for obj in injury_objs:
-            response += f"""• {obj["name"]} ({obj["position"]}): {obj["injury"]}\n"""
+            response += f"""* {obj["name"]} ({obj["position"]}): {obj["injury"]}\n"""
 
         # response += "```"
 
@@ -117,7 +117,7 @@ def get_starting_goalies() -> str:
     ]["data"]
 
     output = ""
-    output += f"🥅 **{page_title}**\n\n"
+    output += f"## 🥅 {page_title}\n\n"
     # output += "```"
 
     for m in matchups:
@@ -173,7 +173,7 @@ def get_line_combinations(team_name: str) -> str:
     ]["combinations"]["players"]
 
     output = ""
-    output += f"🧑‍🧒‍🧒 **{page_title}**"
+    output += f"🧑‍🧒‍🧒 ## {page_title}"
     # output += "```"
 
     for p in players:
