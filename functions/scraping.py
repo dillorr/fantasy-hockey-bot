@@ -173,7 +173,7 @@ def get_line_combinations(team_name: str) -> str:
     ]["combinations"]["players"]
 
     output = ""
-    output += f"🧑‍🧒‍🧒 ## {page_title}"
+    output += f"## 🧑‍🧒‍🧒 {page_title}"
     # output += "```"
 
     for p in players:
@@ -181,11 +181,11 @@ def get_line_combinations(team_name: str) -> str:
 
         if group_name not in output:
             output += "\n\n"
-            output += group_name
+            output += "### {group_name}"
             output += "\n"
 
         output += "\n"
-        output += f'{p["name"]}'
+        output += f'* {p["name"]}'
         output += f' ({p["positionIdentifier"].upper()})'
 
     # output += "```"
