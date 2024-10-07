@@ -181,7 +181,7 @@ def get_line_combinations(team_name: str) -> str:
 
         if group_name not in output:
             output += "\n\n"
-            output += "### {group_name}"
+            output += f"### {group_name}"
             output += "\n"
 
         output += "\n"
