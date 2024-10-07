@@ -190,6 +190,6 @@ def get_line_combinations(team_name: str) -> str:
 
     # output += "```"
 
-    output += f"*Source: <{url}>*\n"
+    output += f"\n\n*Source: <{url}>*\n"
 
     return output
