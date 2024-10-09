@@ -149,7 +149,7 @@ def main():
 
         # oauth = authenticate_yahoo()
 
-        if t.hour == 12 and t.minute == 0:
+        if t.hour == 11 and t.minute == 0:
             response = ""
 
             # DISABLED
