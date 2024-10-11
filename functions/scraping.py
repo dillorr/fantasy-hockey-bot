@@ -133,7 +133,7 @@ def get_starting_goalies() -> str:
         if home_status is None:
             home_status = "Unconfirmed"
 
-        output += f" ({home_status}), "
+        output += f" ({home_status}) vs. "
         output += f'{m["awayGoalieName"]}'
         away_status = m["awayNewsStrengthName"]
 
