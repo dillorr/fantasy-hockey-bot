@@ -54,7 +54,7 @@ def main():
         send_starting_goalies.start()
         send_injury_report.start()
 
-    @bot.command(name="beep", brief="used to test to make sure the bot is online")
+    @bot.command(name="hello", brief="used to test to make sure the bot is online")
     async def beep(ctx):
         await ctx.send("boop")
 
