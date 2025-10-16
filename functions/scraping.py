@@ -159,8 +159,10 @@ def get_line_combinations(team_name: str) -> str:
 
     soup = BeautifulSoup(page.content, "html.parser")
 
+    today = datetime.now(ZoneInfo("America/Los_Angeles")).strftime("%B %d, %Y")
+
     # get title
-    page_title = "Starting Goalies"
+    page_title = "Line Combinations"
 
     for tag in soup.find_all("meta"):
         if tag.get("property", None) == "og:title":
@@ -173,8 +175,7 @@ def get_line_combinations(team_name: str) -> str:
     ]["combinations"]["players"]
 
     output = ""
-    output += f"# 🧑‍🧒‍🧒 {page_title}"
-    # output += "```"
+    output += f"# 🧑‍🧒‍🧒 {page_title} - {today}\n\n"
 
     for p in players:
         group_name = p["groupName"]
@@ -187,8 +188,6 @@ def get_line_combinations(team_name: str) -> str:
         output += "\n"
         output += f'* {p["name"]}'
         output += f' ({p["positionIdentifier"].upper()})'
-
-    # output += "```"
 
     output += f"\n\n*Source: <{url}>*\n"
 
