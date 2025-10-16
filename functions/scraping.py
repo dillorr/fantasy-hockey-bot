@@ -225,8 +225,6 @@ def _format_lines_response(players: List[Dict[str, Any]], page_title: str, date:
 
         # Add group header if this is a new group
         if group_name != current_group:
-            if current_group:  # Add spacing between groups (except for the first)
-                output += "\n"
             output += f"## {group_name}\n\n"
             current_group = group_name
 
