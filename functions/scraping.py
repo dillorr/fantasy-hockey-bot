@@ -180,7 +180,7 @@ def get_line_combinations(team_name: str) -> str:
         group_name = p["groupName"]
 
         if group_name not in output:
-            output += "\n\n"
+            output += "\n"
             output += f"## {group_name}"
             output += "\n"
 
