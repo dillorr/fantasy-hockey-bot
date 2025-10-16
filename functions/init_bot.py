@@ -3,10 +3,17 @@ from discord.ext import commands
 
 
 def init_bot() -> commands.Bot:
+    """
+    Initialize and configure the Discord bot with necessary intents and settings.
+    
+    Returns:
+        commands.Bot: Configured Discord bot instance
+    """
+    # Enable necessary intents for bot functionality
     intents = discord.Intents.default()
     intents.message_content = True
 
-    # We can remove the help_command since slash commands have built-in help
+    # Create bot instance with slash command support
     bot = commands.Bot(
         command_prefix="!",  # Keep prefix for any remaining traditional commands if needed
         intents=intents,
