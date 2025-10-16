@@ -6,12 +6,11 @@ def init_bot() -> commands.Bot:
     intents = discord.Intents.default()
     intents.message_content = True
 
-    help_command = commands.DefaultHelpCommand(no_category="Commands", dm_help=False)
-
+    # We can remove the help_command since slash commands have built-in help
     bot = commands.Bot(
-        command_prefix="!",
+        command_prefix="!",  # Keep prefix for any remaining traditional commands if needed
         intents=intents,
-        help_command=help_command,
+        help_command=None,  # Disable traditional help since we're using slash commands
     )
 
     return bot

@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-
+import discord
 from discord.ext import tasks, commands
 
 
@@ -27,59 +27,53 @@ def main():
 
         text_channels = {channel.name: channel.id for channel in guild.text_channels}
 
+        # Sync slash commands
+        try:
+            synced = await bot.tree.sync()
+            print(f"Synced {len(synced)} command(s)")
+        except Exception as e:
+            print(f"Failed to sync commands: {e}")
+
         # automated jobs
         send_starting_goalies.start()
         send_injury_report.start()
 
-    @bot.command(name="beep", brief="used to test to make sure the bot is online")
-    async def beep(ctx):
-        await ctx.send("boop")
+    @bot.tree.command(name="beep", description="Test to make sure the bot is online")
+    async def beep(interaction: discord.Interaction):
+        await interaction.response.send_message("boop")
 
-    @bot.command(name="goalies", brief="Returns projected starting goalies for the day")
-    async def get_starting_goalies_command(ctx):
-        # await ctx.send("this command is temporarily disabled, sorry!")
+    @bot.tree.command(name="goalies", description="Returns projected starting goalies for the day")
+    async def get_starting_goalies_command(interaction: discord.Interaction):
+        # await interaction.response.send_message("this command is temporarily disabled, sorry!")
 
         response = ""
         response += get_starting_goalies()
-        response += f"\n<@{ctx.message.author.id}>"
+        response += f"\n<@{interaction.user.id}>"
 
-        await ctx.send(response)
+        await interaction.response.send_message(response)
 
-    @bot.command(name="injuries", brief="Returns injury report for the day")
-    async def get_injury_report_command(ctx):
-        # await ctx.send("this command is temporarily disabled, sorry!")
+    @bot.tree.command(name="injuries", description="Returns injury report for the day")
+    async def get_injury_report_command(interaction: discord.Interaction):
+        # await interaction.response.send_message("this command is temporarily disabled, sorry!")
 
         response = ""
         response += get_injury_report()
-        response += f"\n<@{ctx.message.author.id}>"
+        response += f"\n<@{interaction.user.id}>"
 
-        await ctx.send(response)
+        await interaction.response.send_message(response)
 
-    @bot.command(name="lines", brief="Returns current starting lineup for a team")
-    async def get_lines_command(ctx, *args):
-        # await ctx.send("this command is temporarily disabled, sorry!")
+    @bot.tree.command(name="lines", description="Returns current starting lineup for a team")
+    async def get_lines_command(interaction: discord.Interaction, team_name: str):
+        # await interaction.response.send_message("this command is temporarily disabled, sorry!")
 
-        team_name = "-".join([a.lower() for a in args])
+        # Convert the team name to the expected format (lowercase with hyphens)
+        formatted_team_name = team_name.lower().replace(" ", "-")
 
         response = ""
-        response += get_line_combinations(team_name)
-        response += f"\n<@{ctx.message.author.id}>"
+        response += get_line_combinations(formatted_team_name)
+        response += f"\n<@{interaction.user.id}>"
 
-        await ctx.send(response)
-
-    # EVENTS
-    @bot.event
-    async def on_command_error(ctx, error):
-
-        if isinstance(error, commands.MissingRequiredArgument):
-            response = f'Missing required argument: "{error.param}"'
-        elif isinstance(error, commands.BadArgument):
-            response = "Could not parse commands argument"
-        else:
-            print(error)
-            response = f'Whoops! Something went wrong with "{ctx.message.content}".'
-
-        await ctx.send(response)
+        await interaction.response.send_message(response)
 
     # SCHEDULED JOBS
     @tasks.loop(minutes=1)
