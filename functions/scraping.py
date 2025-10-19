@@ -77,7 +77,7 @@ def _format_injury_response(injuries: List[Dict[str, str]], source_url: str) -> 
         str: Formatted injury report message
     """
     today = datetime.now(ZoneInfo("America/Los_Angeles")).strftime("%B %d, %Y")
-    page_title = "NHL Injury Report"
+    page_title = "Injury Report"
     
     response = f"# ☠️ {page_title} - {today}\n\n"
     
@@ -86,8 +86,8 @@ def _format_injury_response(injuries: List[Dict[str, str]], source_url: str) -> 
 
     # Handle Discord message size limit
     if len(response) > 2000:
-        response = f"# ☠️ {page_title} - {today} (Condensed)\n"
-        response += "*Full injury report exceeds Discord message size limit. See source link for more info.*\n\n"
+        response = f"# ☠️ {page_title} - {today} (Condensed\*)\n"
+        response += "*\*Full injury report exceeds Discord message size limit. See source link for more info.*\n\n"
         
         for injury in injuries:
             response += f"* {injury['name']} ({injury['position']}): {injury['injury']}\n"
